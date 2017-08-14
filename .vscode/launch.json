@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "program": "${workspaceRoot}/app.js",
+      "args": [
+        "--remote-debugging-port=9222"
+      ],
+      "protocol": "inspector",
+      "sourceMaps": true
+    },
+    {
+      "name": "Debug Renderer Process",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceRoot}/app"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Start",
+      "configurations": [
+        "Debug Main Process",
+        "Debug Renderer Process"
+      ]
+    }
+  ]
+}
