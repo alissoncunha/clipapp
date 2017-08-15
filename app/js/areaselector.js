@@ -1,5 +1,6 @@
 const path = require('path');
 const { getMouse } = require(path.resolve('app/js/mouse'));
+const audio = new Audio(path.resolve('app/assets/camera.mp3'));
 
 class AreaSelector {
     constructor(canvas, width, height) {
@@ -86,20 +87,31 @@ class AreaSelector {
         this.selecting = false;
         this._destroy();
 
-        this.onSelected(this._get());
+        audio.play();
+
+        setTimeout(() => this.onSelected(this._get()), 50);
     }
 
     _get() {
+        const ratio = window.devicePixelRatio;
+        
+        const x = Math.min(this.x, this.lastx),
+            y = Math.min(this.y, this.lasty),
+            lastx = Math.max(this.x, this.lastx),
+            lasty = Math.max(this.y, this.lasty);
+
         return {
-            x: this.x,
-            y: this.y,
-            width: this.lastx - this.x,
-            height: this.lasty - this.y
+            x: parseInt(x) * ratio,
+            y: parseInt(y) * ratio,
+            width: parseInt(lastx - x) * ratio,
+            height: parseInt(lasty - y) * ratio
         };
     }
 
     _destroy() {
         this._clear();
+
+        this._canvas.style.cursor = 'none';
 
         this._canvas.removeEventListener('mouseup', this._onmouseup);
         this._canvas.removeEventListener('mousedown', this._onmousedown);

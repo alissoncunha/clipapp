@@ -9,13 +9,13 @@ const canvas = document.querySelector('canvas'),
     pointer = screen.getCursorScreenPoint(),
     display = screen.getDisplayNearestPoint(pointer),
     screenshot = new AreaSelector(
-        canvas, display.workAreaSize.width, display.workAreaSize.height
+        canvas, display.size.width, display.size.height
     );
 
 function screenShotArea(display) {
-    const screenSize = display.workAreaSize,
+    const screenSize = display.size,
         dimension = Math.max(screenSize.width, screenSize.height) * window.devicePixelRatio;
-        
+
     return {
         width: screenSize.width * window.devicePixelRatio,
         height: screenSize.height * window.devicePixelRatio

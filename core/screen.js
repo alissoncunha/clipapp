@@ -10,14 +10,18 @@ function init() {
     const { screen } = require('electron'),
         pointer = screen.getCursorScreenPoint(),
         display = screen.getDisplayNearestPoint(pointer),
-        {width,height} = display.workArea;
+        {width, height} = display.size;
 
     window = new BrowserWindow({
-        width, height,
+        x: 0,
+        y: 0,
+        width,
+        height,
         transparent: true,
         frame: false,
         minWidth: width,
-        minHeight: height
+        minHeight: height,
+        enableLargerThanScreen: true
     });
 
     window.loadURL(capturer.url);
