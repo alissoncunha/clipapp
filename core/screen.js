@@ -12,6 +12,8 @@ function init() {
         display = screen.getDisplayNearestPoint(pointer),
         {width, height} = display.size;
 
+    if (window) return;
+    
     window = new BrowserWindow({
         x: 0,
         y: 0,
@@ -28,8 +30,9 @@ function init() {
     window.show();
 }
 
-ipcMain.on('saveToImgr', (ev) => {
-    
+ipcMain.on('finished-message', (ev) => {
+    window = null;
+    console.log('finished', ev);
 });
 
 module.exports = init;
