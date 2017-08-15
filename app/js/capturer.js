@@ -39,8 +39,8 @@ function takeSnapshot(opts, cb) {
 
     desktopCapturer.getSources(opts.sourceOpts, (error, sources) => {
         if (error) throw error;
-        
-        let source = sources.find(f => f.id.replace('screen:', '') == display.id),
+
+        let source = sources.find(f => f.id.match(/(\d+)/)[0] == display.id),
             image = source.thumbnail;
 
         if (opts.crop) {
