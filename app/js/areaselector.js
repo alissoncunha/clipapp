@@ -94,7 +94,7 @@ class AreaSelector {
 
     _get() {
         const ratio = window.devicePixelRatio;
-        
+
         const x = Math.min(this.x, this.lastx),
             y = Math.min(this.y, this.lasty),
             lastx = Math.max(this.x, this.lastx),

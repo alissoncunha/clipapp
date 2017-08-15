@@ -30,6 +30,7 @@ screenshot.onSelected = (areaSize) => {
 
     takeSnapshot(opts, (path) => {
         shell.openExternal(`file://${path}`);
+        ipcRenderer.send('finished-message', 'lala');
     });
 };
 
@@ -39,7 +40,7 @@ function takeSnapshot(opts, cb) {
     desktopCapturer.getSources(opts.sourceOpts, (error, sources) => {
         if (error) throw error;
         
-        let source = sources[0],
+        let source = sources.find(f => f.id.replace('screen:', '') == display.id),
             image = source.thumbnail;
 
         if (opts.crop) {

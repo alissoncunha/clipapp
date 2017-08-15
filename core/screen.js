@@ -10,13 +10,14 @@ function init() {
     const { screen } = require('electron'),
         pointer = screen.getCursorScreenPoint(),
         display = screen.getDisplayNearestPoint(pointer),
-        {width, height} = display.size;
+        {width, height} = display.size,
+        {x, y} = display.bounds;
 
     if (window) return;
     
     window = new BrowserWindow({
-        x: 0,
-        y: 0,
+        x,
+        y,
         width,
         height,
         transparent: true,
