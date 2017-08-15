@@ -1,4 +1,4 @@
-module.exports = function getMouse(canvas, e) {
+function getMouse(canvas, e) {
     const rect = canvas.getBoundingClientRect(),
         scaleX = canvas.width / rect.width,
         scaleY = canvas.height / rect.height;
@@ -7,4 +7,8 @@ module.exports = function getMouse(canvas, e) {
         x: parseInt(e.clientX - rect.left) * scaleX,
         y: parseInt(e.clientY - rect.top) * scaleY
     };
+}
+
+module.exports = {
+    getMouse
 }

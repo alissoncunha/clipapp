@@ -17,17 +17,20 @@ function screenShotArea(display) {
         dimension = Math.max(screenSize.width, screenSize.height) * window.devicePixelRatio;
         
     return {
-        width: dimension,
-        height: dimension
+        width: screenSize.width * window.devicePixelRatio,
+        height: screenSize.height * window.devicePixelRatio
     };
 }
 
 screenshot.onSelected = (areaSize) => {
     const opts = {
-        sourceOpts: { types: ['screen'], thumbnailSize: screenShotArea(display) }
+        sourceOpts: { types: ['screen'], thumbnailSize: screenShotArea(display) },
+        crop: areaSize
     };
 
-    takeSnapshot(opts, () => {});
+    takeSnapshot(opts, (path) => {
+        shell.openExternal(`file://${path}`);
+    });
 };
 
 function takeSnapshot(opts, cb) {
@@ -35,12 +38,17 @@ function takeSnapshot(opts, cb) {
 
     desktopCapturer.getSources(opts.sourceOpts, (error, sources) => {
         if (error) throw error;
+        
+        let source = sources[0],
+            image = source.thumbnail;
+
+        if (opts.crop) {
+            image = source.thumbnail.crop(opts.crop);
+        } 
     
-        const source = sources[0];
-    
-        fs.writeFile(screenshotPath, source.thumbnail.toPNG(), (err) => {
+        fs.writeFile(screenshotPath, image.toPNG(), (err) => {
             if (err) return console.log(err.message);
-            // shell.openExternal(`file://${screenshotPath}`);
+            cb(screenshotPath);
         });
     });
 }
