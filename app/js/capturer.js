@@ -13,8 +13,7 @@ const canvas = document.querySelector('canvas'),
     );
 
 function screenShotArea(display) {
-    const screenSize = display.size,
-        dimension = Math.max(screenSize.width, screenSize.height) * window.devicePixelRatio;
+    const screenSize = display.size;
 
     return {
         width: screenSize.width * window.devicePixelRatio,
@@ -29,8 +28,8 @@ screenshot.onSelected = (areaSize) => {
     };
 
     takeSnapshot(opts, (path) => {
-        shell.openExternal(`file://${path}`);
-        ipcRenderer.send('finished-message', 'lala');
+        // shell.openExternal(`file://${path}`);
+        ipcRenderer.send('finish-snapshot', path);
     });
 };
 
@@ -45,7 +44,7 @@ function takeSnapshot(opts, cb) {
 
         if (opts.crop) {
             image = source.thumbnail.crop(opts.crop);
-        } 
+        };
     
         fs.writeFile(screenshotPath, image.toPNG(), (err) => {
             if (err) return console.log(err.message);

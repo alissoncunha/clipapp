@@ -1,4 +1,5 @@
 const {BrowserWindow, ipcMain} = require('electron');
+const imgur = require('./imgur');
 
 const capturer = {
     url: `file://${process.cwd()}/app/capturer.html`
@@ -31,9 +32,15 @@ function init() {
     window.show();
 }
 
-ipcMain.on('finished-message', (ev) => {
+function callbackUpload(err, req, body) {
+    const {data} = JSON.parse(body);
+};
+
+ipcMain.on('finish-snapshot', (ev, file) => {
+    window.hide();
     window = null;
-    console.log('finished', ev);
+    
+    imgur(file, callbackUpload);
 });
 
 module.exports = init;
