@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/electron ./app",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "release": "build"
   },
   "author": "Alisson Cunha",
   "license": "ISC",
@@ -19,9 +20,8 @@
     "electron-builder": "^19.24.1"
   },
   "build": {
-    "appId": "your.id",
-    "mac": {
-      "category": "your.app.category.type"
-    }
+    "appId": "com.electron.clipapp",
+    "mac": {},
+    "publish": ["github"]
   }
 }
