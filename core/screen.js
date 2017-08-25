@@ -1,4 +1,4 @@
-const {BrowserWindow, ipcMain} = require('electron');
+const {BrowserWindow, ipcMain, clipboard} = require('electron');
 const imgur = require('./imgur');
 
 const capturer = {
@@ -34,6 +34,7 @@ function init() {
 
 function callbackUpload(err, req, body) {
     const {data} = JSON.parse(body);
+    clipboard.writeText(data.link);
 };
 
 ipcMain.on('finish-snapshot', (ev, file) => {
