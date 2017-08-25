@@ -1,6 +1,6 @@
 {
   "name": "clipmac",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Electron Screenshooter",
   "main": "app.js",
   "scripts": {
@@ -22,6 +22,8 @@
   "build": {
     "appId": "com.electron.clipapp",
     "mac": {},
-    "publish": ["github"]
+    "publish": [
+      "github"
+    ]
   }
 }
