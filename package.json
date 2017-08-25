@@ -12,16 +12,18 @@
   "author": "Alisson Cunha",
   "license": "ISC",
   "dependencies": {
+    "electron-updater": "^2.8.7",
     "menubar": "^5.2.3"
   },
   "devDependencies": {
     "electron": "^1.7.5",
-    "electron-reload": "^1.2.1",
-    "electron-builder": "^19.24.1"
+    "electron-builder": "^19.24.1",
+    "electron-reload": "^1.2.1"
   },
   "build": {
     "appId": "com.electron.clipapp",
     "mac": {},
+    "win": {},
     "publish": [
       "github"
     ]
