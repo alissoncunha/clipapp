@@ -1,4 +1,4 @@
-const { ipcRenderer, desktopCapturer, screen } = require('electron');
+const { ipcRenderer, desktopCapturer, screen, clipboard } = require('electron');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
@@ -27,6 +27,11 @@ screenshot.onSelected = (areaSize) => {
         crop: areaSize
     };
 
+    const notify = new Notification('Upload', { 
+        body: 'Realizando upload no imgr',
+        icon: `${__dirname}/assets/upload.png`
+    });
+
     takeSnapshot(opts, (path) => {
         ipcRenderer.send('finish-snapshot', path);
     });
@@ -51,6 +56,17 @@ function takeSnapshot(opts, cb) {
         });
     });
 }
+
+ipcRenderer.on('success', (ev, link) => {
+    let notify = new Notification('Upload realizado no imgrl', {
+        body: link,
+        icon: `${__dirname}/assets/download.png`
+    });
+
+    notify.onclick = () => {
+        clipboard.writeText(link);
+    };
+});
 
 screenshot.start();
 

@@ -32,16 +32,19 @@ function init() {
     window.show();
 }
 
-function callbackUpload(err, req, body) {
+function copyLink(body) {
     const {data} = JSON.parse(body);
     clipboard.writeText(data.link);
+    return data.link;
 };
 
 ipcMain.on('finish-snapshot', (ev, file) => {
     window.hide();
     window = null;
     
-    imgur(file, callbackUpload);
+    imgur(file, (err, req, body) => {
+        ev.sender.send('success', copyLink(body));
+    });
 });
 
 module.exports = init;

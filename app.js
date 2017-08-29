@@ -6,7 +6,7 @@ const options = {
     index: `file://${__dirname}/app.html`,
     width: 300,
     height: 200,
-    tooltip: ''
+    icon: `${__dirname}/icon.png`
 };
 
 const mb = menubar(options);
