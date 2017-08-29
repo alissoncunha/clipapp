@@ -14,3 +14,12 @@ Run in dev
 ```
 npm start
 ```
+
+## Building
+
+This uses [electron-builder](https://github.com/electron-userland/electron-builder)
+
+```
+yarn build
+yarn release
+```
