@@ -29,7 +29,8 @@ screenshot.onSelected = (areaSize) => {
 
     const notify = new Notification('Upload', { 
         body: 'Realizando upload no imgr',
-        icon: `${__dirname}/assets/upload.png`
+        icon: `${__dirname}/assets/upload.png`,
+        silent: true
     });
 
     takeSnapshot(opts, (path) => {
