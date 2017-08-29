@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/electron ./app",
+    "postinstall": "electron-builder install-app-deps",
     "build": "electron-builder",
     "release": "build"
   },
@@ -13,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "electron-updater": "^2.8.7",
-    "menubar": "^5.2.3"
+    "menubar": "^5.2.3",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "electron": "^1.7.5",
@@ -25,7 +27,10 @@
     "mac": {
       "icon": "icon.icns"
     },
-    "win": {},
+    "win": {
+      "target": "nsis",
+      "icon": "icon.icns"
+    },
     "publish": [
       "github"
     ]

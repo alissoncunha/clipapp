@@ -2,7 +2,7 @@ const {BrowserWindow, ipcMain, clipboard} = require('electron');
 const imgur = require('./imgur');
 
 const capturer = {
-    url: `file://${process.cwd()}/app/capturer.html`
+    url: `file://${__dirname}/../app/capturer.html`
 };
 
 let window = null;

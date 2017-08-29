@@ -1,6 +1,8 @@
 const path = require('path');
-const { getMouse } = require(path.resolve('app/js/mouse'));
-const audio = new Audio(path.resolve('app/assets/camera.mp3'));
+const pathname = path.resolve(__dirname);
+
+const { getMouse } = require(`${pathname}/mouse`);
+const audio = new Audio(`${pathname}/../assets/camera.mp3`);
 
 class AreaSelector {
     constructor(canvas, width, height) {

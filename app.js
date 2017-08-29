@@ -15,5 +15,3 @@ const options = {
 const mb = menubar(options);
 
 mb.on('ready', onReady);
-
-console.log(mb.tray);

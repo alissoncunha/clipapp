@@ -3,7 +3,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-const { AreaSelector } = require(path.resolve('app/js/areaselector'));
+const { AreaSelector } = require(path.resolve(`${__dirname}/js/areaselector`));
 
 const canvas = document.querySelector('canvas'),
     pointer = screen.getCursorScreenPoint(),
